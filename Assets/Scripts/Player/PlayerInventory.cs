@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class PlayerInventory : MonoBehaviour
 {
-    GameObject equipped;
+    GameObject _equipped;
 
     [SerializeField] ArmsAnimation _armsAnimation;
     [SerializeField] Transform _leftHand;
@@ -18,22 +21,42 @@ public class PlayerInventory : MonoBehaviour
     {
         _inventory = new List<GameObject>();
 
-        LoadEquippable(GlobalValues.EquippableType.Dusterator);
-        LoadEquippable(GlobalValues.EquippableType.OlBetsy);
-        UpdateEquipped(_inventory[_currentSlot]);
+        List<GlobalValues.EquippableType> loadout = new List<GlobalValues.EquippableType>() { 
+            GlobalValues.EquippableType.Dusterator,
+            GlobalValues.EquippableType.OlBetsy
+        };
+
+        loadout.ForEach(e => LoadEquippable(e));
     }
 
-    
+    public GameObject GetEquipped()
+    {
+        return _equipped;
+    }
 
     void LoadEquippable(GlobalValues.EquippableType equippable)
     {
+        Addressables.LoadAssetAsync<GameObject>(GlobalValues.EquippableAddressableNameMap[equippable]).Completed += OnEquippableLoadDone;
+    }
+
+    void OnEquippableLoadDone(AsyncOperationHandle<GameObject> equippableObjectHandle)
+    {
+        GameObject equippableObject = equippableObjectHandle.Result;
+
+        if (equippableObject == null)
+        {
+            Debug.LogError("Equipple was not loaded successfully");
+        }
         // equippable objects should be disabled by default
-        GameObject equippableObject = Instantiate(Resources.Load(GlobalValues.EquippableResourceMap[equippable]) as GameObject);
-        equippableObject.SetActive(false);
+        
+        GameObject equippableClone = Instantiate(equippableObject);
+        equippableClone.SetActive(false);
 
-        equippableObject = PositionEquipped(equippableObject);
+        equippableClone = PositionEquipped(equippableClone);
 
-        _inventory.Add(equippableObject);
+        _inventory.Add(equippableClone);
+
+        UpdateEquipped();
     }
 
     GameObject PositionEquipped(GameObject equippableObject)
@@ -51,7 +74,9 @@ public class PlayerInventory : MonoBehaviour
 
         // Position equippable and select correct holding animation
         equippableObject.transform.parent = handTransform;
+
         equippableObject.transform.localPosition = Vector3.zero;
+        equippableObject.transform.localRotation = Quaternion.identity;
 
         _armsAnimation.SetHoldType(currentEquippable.holdType);
 
@@ -64,17 +89,17 @@ public class PlayerInventory : MonoBehaviour
         ChangeInventorySlot();
     }
 
-    void UpdateEquipped(GameObject equippable)
+    void UpdateEquipped()
     {
-        if (equipped != null)
+        if (_equipped != null)
         { 
-            equipped.SetActive(false);
+            _equipped.SetActive(false);
         }
 
-        equipped = _inventory[_currentSlot];
-        equipped.SetActive(true);
+        _equipped = _inventory[_currentSlot];
+        _equipped.SetActive(true);
 
-        _armsAnimation.SetHoldType(equipped.GetComponent<EquippableItem>().holdType);
+        _armsAnimation.SetHoldType(_equipped.GetComponent<EquippableItem>().holdType);
     }
 
     void ChangeInventorySlot()
@@ -96,6 +121,6 @@ public class PlayerInventory : MonoBehaviour
             _currentSlot--;
         }
 
-        UpdateEquipped(_inventory[_currentSlot]);
+        UpdateEquipped();
     }
 }

@@ -8,7 +8,9 @@ public class DustController : MonoBehaviour
     public float destroyDistance = 0.05f;
 
     ParticleSystem[] _particleSystems = new ParticleSystem[GlobalValues.MAX_PARTICLE_SYSTEMS];
+
     int _systemIndex = 0;
+    int _totalParticles = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class DustController : MonoBehaviour
             if (_systemIndex < GlobalValues.MAX_PARTICLE_SYSTEMS) 
             {
                 ParticleSystem system = obj.gameObject.GetComponent<ParticleSystem>();
+                _totalParticles += system.emission.GetBurst(0).maxCount;
                 _particleSystems[_systemIndex++] = system;
             }
         }
@@ -47,6 +50,7 @@ public class DustController : MonoBehaviour
             for (int i = 0; i < _systemIndex; i++)
             {
                 ParticleSystem system = _particleSystems[i];
+                
                 if (system != null)
                 {
                     ParticleSystem.Particle[] particles = new ParticleSystem.Particle[system.particleCount];
@@ -70,6 +74,8 @@ public class DustController : MonoBehaviour
                         {
                             _targetVacuum.StartIntaking();
                             particles[k].remainingLifetime = 0;
+                            _totalParticles -= 1;
+                            Debug.Log(_totalParticles);
                         }
                     }
                     particles = particles.Where(p => p.remainingLifetime > 0).ToArray();

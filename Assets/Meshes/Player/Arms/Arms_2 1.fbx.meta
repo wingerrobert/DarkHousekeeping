@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 22c3354dbf633ba479a3699ebe76354f
+guid: d73529ed6f602dc4c88205d39c8071fa
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable:
@@ -18,6 +18,9 @@ ModelImporter:
   - first:
       74: 2384823337591182650
     second: Armature|HandVacuumOff (1)
+  - first:
+      74: -6963799008021267817
+    second: Armature|HandVacuumOn (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -47,11 +50,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|HandVacuumOff (1)
-      takeName: Armature|HandVacuumOff
+      name: Armature|HandVacuumOn (1)
+      takeName: Armature|HandVacuumOn
       internalID: 0
       firstFrame: 0
-      lastFrame: 13
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -116,7 +119,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

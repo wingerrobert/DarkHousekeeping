@@ -10,8 +10,18 @@ public class ArmsAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    public void SetSucking(bool value)
+    {
+        _animator.SetBool("IsVacuuming", value);
+    }
+
     public void SetHoldType(GlobalValues.EquippableHoldType holdType)
     {
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+        
         string holdTypeValue = string.Empty;
         switch (holdType)
         {

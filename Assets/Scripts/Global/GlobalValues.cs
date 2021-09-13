@@ -32,10 +32,10 @@ public class GlobalValues : MonoBehaviour
         Dusterator
     }
 
-    public static Dictionary<EquippableType, string> EquippableResourceMap = new Dictionary<EquippableType, string>()
+    public static Dictionary<EquippableType, string> EquippableAddressableNameMap = new Dictionary<EquippableType, string>()
     {
-        { EquippableType.OlBetsy, "Prefabs/Equippable/Vacuums/OlBetsy" },
-        { EquippableType.Dusterator, "Prefabs/Equippable/Vacuums/Dusterator" },
+        { EquippableType.OlBetsy, "Vacuum_OlBetsy" },
+        { EquippableType.Dusterator, "Vacuum_Dusterator" },
     };
 
     public static Dictionary<Tags, string> TagValues = new Dictionary<Tags, string>() 

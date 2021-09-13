@@ -34,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float currentSpeed = (Input.GetKey(KeyCode.LeftShift)) ? _runSpeed : speed;
 
+        if (_isCrouching)
+        {
+            currentSpeed = _crouchSpeed;
+        }
+
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 

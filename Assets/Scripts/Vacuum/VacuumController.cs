@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class VacuumController : MonoBehaviour
 {
+    ArmsAnimation _armsAnimation;
+
     public float suctionDistance = 0.5f;
     public float suctionStrength = 1f;
     public float initialIntakeTime = 1.0f;  // The time it takes for dust intake sounds to stop
@@ -17,6 +19,7 @@ public class VacuumController : MonoBehaviour
 
     private void Start()
     {
+        _armsAnimation = GetComponentInParent<ArmsAnimation>();
         _intakeTime = initialIntakeTime;
         _soundController = GetComponent<VacuumSoundController>();
     }
@@ -46,10 +49,13 @@ public class VacuumController : MonoBehaviour
 
         isSucking = Input.GetMouseButton(0);
 
+        _armsAnimation.SetSucking(isSucking);
+
         if (isSucking)
         {
             if (!_soundController.isPlayingSuck)
             {
+                
                 _soundController.StartSuckSound();
             }
         }
