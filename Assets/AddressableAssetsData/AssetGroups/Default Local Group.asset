@@ -29,6 +29,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 1b657512cf104df40ae9c899c86a98c0
+    m_Address: Cloth_DustyRag
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: aaa93b782588b974683b3e9192f9d8e6, type: 2}
   m_SchemaSet:

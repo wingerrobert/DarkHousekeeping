@@ -23,7 +23,8 @@ public class PlayerInventory : MonoBehaviour
 
         List<GlobalValues.EquippableType> loadout = new List<GlobalValues.EquippableType>() { 
             GlobalValues.EquippableType.Dusterator,
-            GlobalValues.EquippableType.OlBetsy
+            GlobalValues.EquippableType.OlBetsy,
+            GlobalValues.EquippableType.DustyRag
         };
 
         loadout.ForEach(e => LoadEquippable(e));

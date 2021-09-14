@@ -15,6 +15,11 @@ public class ArmsAnimation : MonoBehaviour
         _animator.SetBool("IsVacuuming", value);
     }
 
+    public void SetWiping(bool value)
+    {
+        _animator.SetBool("IsWiping", value);
+    }
+
     public void SetHoldType(GlobalValues.EquippableHoldType holdType)
     {
         if (_animator == null)
@@ -30,6 +35,9 @@ public class ArmsAnimation : MonoBehaviour
                 break;
             case GlobalValues.EquippableHoldType.StandingVacuum:
                 holdTypeValue = "StandingVacuumHold";
+                break;
+            case GlobalValues.EquippableHoldType.Cloth:
+                holdTypeValue = "ClothHold";
                 break;
         }
         _animator.SetTrigger(holdTypeValue);
