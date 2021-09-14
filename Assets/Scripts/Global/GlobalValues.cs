@@ -11,13 +11,15 @@ public class GlobalValues : MonoBehaviour
     {
         Player,
         Dust,
-        Suction
+        Suction,
+        SurfaceCleaner
     };
 
     public enum EquippableHoldType
     { 
         StandingVacuum,
-        SmallHandHeldVacuum
+        SmallHandHeldVacuum,
+        Cloth
     }
 
     public enum EquippableHandedness
@@ -29,19 +31,22 @@ public class GlobalValues : MonoBehaviour
     public enum EquippableType 
     {
         OlBetsy,
-        Dusterator
+        Dusterator,
+        DustyRag
     }
 
     public static Dictionary<EquippableType, string> EquippableAddressableNameMap = new Dictionary<EquippableType, string>()
     {
         { EquippableType.OlBetsy, "Vacuum_OlBetsy" },
         { EquippableType.Dusterator, "Vacuum_Dusterator" },
+        { EquippableType.DustyRag, "Cloth_DustyRag" }
     };
 
     public static Dictionary<Tags, string> TagValues = new Dictionary<Tags, string>() 
     {
         { Tags.Player, "Player" },
         { Tags.Dust, "Dust" },
-        { Tags.Suction, "Suction" }
+        { Tags.Suction, "Suction" },
+        { Tags.SurfaceCleaner, "SurfaceCleaner" }
     };
 }
