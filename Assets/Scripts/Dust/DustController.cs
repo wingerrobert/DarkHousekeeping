@@ -21,7 +21,12 @@ public class DustController : MonoBehaviour
             if (_systemIndex < GlobalValues.MAX_PARTICLE_SYSTEMS) 
             {
                 ParticleSystem system = obj.gameObject.GetComponent<ParticleSystem>();
-                _totalParticles += system.emission.GetBurst(0).maxCount;
+                
+                if (system.emission.burstCount > 0)
+                { 
+                    _totalParticles += system.emission.GetBurst(0).maxCount;
+                }
+
                 _particleSystems[_systemIndex++] = system;
             }
         }

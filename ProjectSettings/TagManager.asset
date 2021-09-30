@@ -7,13 +7,14 @@ TagManager:
   - Dust
   - Suction
   - Hands
-  - Equipped_R
-  - Equipped_L
+  - SurfaceCleaner
+  - WipableSurface
+  - Door
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
@@ -24,8 +25,8 @@ TagManager:
   - Hands
   - Player
   - Trash
-  - 
-  - 
+  - Door
+  - Enemy
   - 
   - 
   - 

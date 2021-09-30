@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ClothAnimation : MonoBehaviour
 {
+    public bool isWiping = false;
+
     ArmsAnimation _armsAnimation;
 
     // Start is called before the first frame update
@@ -15,13 +17,7 @@ public class ClothAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            _armsAnimation.SetWiping(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            _armsAnimation.SetWiping(false);
-        }
+        isWiping = Input.GetKey(KeyCode.Mouse0);
+        _armsAnimation.SetWiping(isWiping);
     }
 }

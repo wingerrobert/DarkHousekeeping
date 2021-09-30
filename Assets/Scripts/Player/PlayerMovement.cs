@@ -39,12 +39,14 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = _crouchSpeed;
         }
 
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        //float moveX = Input.GetAxis("Horizontal");
+        //float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        //Vector3 move = transform.right * moveX + transform.forward * moveZ;
 
-        _rigidBody.velocity = move * currentSpeed * Time.deltaTime;
+        //_rigidBody.MovePosition(transform.position + move.normalized * Time.fixedDeltaTime * currentSpeed);
+        _rigidBody.MovePosition(transform.position + (transform.forward * Input.GetAxis("Vertical") * currentSpeed * Time.fixedDeltaTime) + (transform.right * Input.GetAxis("Horizontal") * currentSpeed * Time.fixedDeltaTime));
+
     }
 
     void CheckCrouch()
@@ -85,9 +87,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MoveUpdate();
+    }
+
+    private void Update()
+    {
         CheckCrouch();
     }
 }
