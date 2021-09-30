@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3553990303791321392}
   - component: {fileID: 1942592587225408737}
   - component: {fileID: 4164160149183572998}
+  - component: {fileID: 6610686735326977257}
   m_Layer: 13
   m_Name: HyptBottle
   m_TagString: Untagged
@@ -116,4 +117,16 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
+--- !u!114 &6610686735326977257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049696889814757605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f7f7900a6e98f4f9027aee625e2573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
