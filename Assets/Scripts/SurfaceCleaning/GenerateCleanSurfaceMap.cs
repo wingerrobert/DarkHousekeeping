@@ -8,11 +8,14 @@ public class GenerateCleanSurfaceMap : MonoBehaviour
     [SerializeField] GameObject _planeObject;
     [SerializeField] Texture2D _cleanTexture;
 
+    GameObject[] _surfaceCleaners;
+
     MeshCollider _collider;
     Texture2D _generatedTexture;
     Material _grimeMaterial;
     
-    Ray _mouseRay;
+    Ray _clothRayForward;
+    Ray _clothRayBackward;
     Vector3 _hitPosition;
 
     int _textureSizeX = 512;
@@ -21,9 +24,12 @@ public class GenerateCleanSurfaceMap : MonoBehaviour
     float _pixelRatioX = 1.0f;
     float _pixelRatioY = 1.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    bool _initialized = false;
+
+    public void InitializeWipableSurface()
     {
+        _surfaceCleaners = GameObject.FindGameObjectsWithTag(GlobalValues.TagValues[GlobalValues.Tags.SurfaceCleaner]);
+
         _collider = _planeObject.GetComponent<MeshCollider>();
         _grimeMaterial = GetComponent<DecalProjector>().material;
         _generatedTexture = new Texture2D(_textureSizeX, _textureSizeY);
@@ -36,7 +42,13 @@ public class GenerateCleanSurfaceMap : MonoBehaviour
         FillTextureWithWhite();
         _grimeMaterial.SetTexture("CleanTexture", _generatedTexture);
 
-        StartCoroutine("DrawPixel");
+        _initialized = true;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     void FillTextureWithWhite()
@@ -47,34 +59,6 @@ public class GenerateCleanSurfaceMap : MonoBehaviour
             {
                 Color color = Color.white;
             }
-        }
-    }
-
-    IEnumerator DrawPixel()
-    {
-        for (;;)
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                _mouseRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-
-                RaycastHit info;
-
-                if (_collider.Raycast(_mouseRay, out info, 1.0f))
-                {
-                    _hitPosition = info.point;
-                    Vector3 centerPosition = _collider.transform.InverseTransformPoint(_hitPosition);
-
-                    Vector3 offsetPosition = new Vector3((centerPosition.x + 5.0f) * _pixelRatioX, 0.0f, (centerPosition.z + 5.0f) * _pixelRatioY);
-
-                    DrawTexture(Mathf.RoundToInt(offsetPosition.x), Mathf.RoundToInt(offsetPosition.z));
-
-                    _generatedTexture.Apply();
-
-                    _grimeMaterial.SetTexture("CleanTexture", _generatedTexture);
-                }
-            }
-            yield return null;
         }
     }
 
@@ -104,11 +88,63 @@ public class GenerateCleanSurfaceMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_initialized)
+        {
+            return;
+        }
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            foreach (GameObject cleaner in _surfaceCleaners)
+            {
+                _clothRayForward = new Ray(cleaner.transform.position, cleaner.transform.forward);
+                _clothRayBackward = new Ray(cleaner.transform.position, -cleaner.transform.forward);
+
+                RaycastHit info;
+
+                bool hitForward = false;
+                bool hitBackward = false;
+
+                hitForward = _collider.Raycast(_clothRayForward, out info, 1.0f);
+
+                if (!hitForward)
+                {
+                    hitBackward = _collider.Raycast(_clothRayBackward, out info, 1.0f);
+                }
+                
+
+                if (hitForward || hitBackward)
+                {
+                    _hitPosition = info.point;
+                    Vector3 centerPosition = _collider.transform.InverseTransformPoint(_hitPosition);
+
+                    Vector3 offsetPosition = new Vector3((centerPosition.x + 5.0f) * _pixelRatioX, 0.0f, (centerPosition.z + 5.0f) * _pixelRatioY);
+
+                    DrawTexture(Mathf.RoundToInt(offsetPosition.x), Mathf.RoundToInt(offsetPosition.z));
+
+                    _generatedTexture.Apply();
+
+                    _grimeMaterial.SetTexture("CleanTexture", _generatedTexture);
+                }
+            }
+        }
     }
 
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(Camera.main.transform.position, _mouseRay.direction);
+        if (!_initialized)
+        {
+            return;
+        }
+
+        foreach (GameObject cleaner in _surfaceCleaners)
+        {
+            _clothRayForward = new Ray(cleaner.transform.position, cleaner.transform.forward);
+
+            Debug.DrawRay(cleaner.transform.position, cleaner.transform.forward);
+            Debug.DrawRay(cleaner.transform.position, -cleaner.transform.forward);
+        }
+
+        
         Gizmos.DrawWireSphere(_hitPosition, 0.1f);
     }
 }

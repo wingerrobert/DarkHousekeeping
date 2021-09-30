@@ -12,7 +12,9 @@ public class GlobalValues : MonoBehaviour
         Player,
         Dust,
         Suction,
-        SurfaceCleaner
+        SurfaceCleaner,
+        WipableSurface,
+        Door
     };
 
     public enum EquippableHoldType
@@ -35,6 +37,16 @@ public class GlobalValues : MonoBehaviour
         DustyRag
     }
 
+    public enum EnemyType
+    { 
+        JuicerGrub
+    }
+
+    public static Dictionary<EnemyType, string> EnemyAddressableNameMap = new Dictionary<EnemyType, string>()
+    {
+        { EnemyType.JuicerGrub, "Enemy_JuicerGrub" }
+    };
+
     public static Dictionary<EquippableType, string> EquippableAddressableNameMap = new Dictionary<EquippableType, string>()
     {
         { EquippableType.OlBetsy, "Vacuum_OlBetsy" },
@@ -47,6 +59,8 @@ public class GlobalValues : MonoBehaviour
         { Tags.Player, "Player" },
         { Tags.Dust, "Dust" },
         { Tags.Suction, "Suction" },
-        { Tags.SurfaceCleaner, "SurfaceCleaner" }
+        { Tags.SurfaceCleaner, "SurfaceCleaner" },
+        { Tags.WipableSurface, "WipableSurface" },
+        { Tags.Door, "Door" }
     };
 }

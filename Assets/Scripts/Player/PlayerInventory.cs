@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class PlayerInventory : MonoBehaviour
 {
+    public List<GlobalValues.EquippableType> loadout;
+    public float _changeEquippableDelay = 0.25f;
+
     GameObject _equipped;
 
     [SerializeField] ArmsAnimation _armsAnimation;
@@ -14,14 +18,21 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] Transform _rightHand;
 
     List<GameObject> _inventory;
+    GameObject[] _wipableSurfaces;
 
     int _currentSlot = 0;
 
+    float _lastEquippableTime = 0.0f;
+
+    bool _equippableLoadDone = false;
+
     void Start()
     {
+        _wipableSurfaces = GameObject.FindGameObjectsWithTag(GlobalValues.TagValues[GlobalValues.Tags.WipableSurface]);
+
         _inventory = new List<GameObject>();
 
-        List<GlobalValues.EquippableType> loadout = new List<GlobalValues.EquippableType>() { 
+        loadout = new List<GlobalValues.EquippableType>() { 
             GlobalValues.EquippableType.Dusterator,
             GlobalValues.EquippableType.OlBetsy,
             GlobalValues.EquippableType.DustyRag
@@ -51,13 +62,23 @@ public class PlayerInventory : MonoBehaviour
         // equippable objects should be disabled by default
         
         GameObject equippableClone = Instantiate(equippableObject);
-        equippableClone.SetActive(false);
 
         equippableClone = PositionEquipped(equippableClone);
 
         _inventory.Add(equippableClone);
 
-        UpdateEquipped();
+        if (_inventory.Count == loadout.Count)
+        {
+            _equippableLoadDone = true;
+            InitializeWipableSurfaces();
+            DisableAllEquippables();
+            UpdateEquipped();
+        }
+    }
+
+    void DisableAllEquippables()
+    {
+        _inventory.ForEach(e => e.SetActive(false));
     }
 
     GameObject PositionEquipped(GameObject equippableObject)
@@ -79,15 +100,29 @@ public class PlayerInventory : MonoBehaviour
         equippableObject.transform.localPosition = Vector3.zero;
         equippableObject.transform.localRotation = Quaternion.identity;
 
-        _armsAnimation.SetHoldType(currentEquippable.holdType);
-
         return equippableObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ChangeInventorySlot();
+        if (!_equippableLoadDone)
+        {
+            return;
+        }
+
+        if (Time.time > _changeEquippableDelay + _lastEquippableTime)
+        { 
+            ChangeInventorySlot();
+        }
+    }
+
+    void InitializeWipableSurfaces()
+    {
+        for (int i = 0; i < _wipableSurfaces.Length; i++)
+        {
+            _wipableSurfaces[i].GetComponent<GenerateCleanSurfaceMap>().InitializeWipableSurface();
+        }
     }
 
     void UpdateEquipped()
@@ -108,20 +143,20 @@ public class PlayerInventory : MonoBehaviour
         // scroll is > 0 = scroll up, scroll is < 0 = scroll down, scroll = 0 = no scrolling
         float scroll = Input.mouseScrollDelta.y;
 
-        if (scroll == 0)
+        if (scroll != 0)
         {
-            return;
-        }
+            if (scroll > 0 && _currentSlot < _inventory.Count - 1)
+            {
+                _currentSlot++;
+            }
+            else if (scroll < 0 && _currentSlot > 0)
+            {
+                _currentSlot--;
+            }
 
-        if (scroll > 0 && _currentSlot < _inventory.Count - 1) 
-        {
-            _currentSlot++;
-        }
-        else if (scroll < 0 && _currentSlot > 0)
-        {
-            _currentSlot--;
-        }
+            UpdateEquipped();
 
-        UpdateEquipped();
+            _lastEquippableTime = Time.time;
+        }
     }
 }

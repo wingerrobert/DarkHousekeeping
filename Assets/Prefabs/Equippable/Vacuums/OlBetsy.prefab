@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 2527751065561209176}
   - component: {fileID: 7302784675867477668}
   - component: {fileID: 746005434653398911}
+  - component: {fileID: 6654984815124001303}
   m_Layer: 11
   m_Name: StandingVacuumRoot 1
   m_TagString: Untagged
@@ -163,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1034640250589819799}
   m_LocalRotation: {x: -0.4216292, y: -0.6058653, z: -0.62798536, w: 0.24655713}
-  m_LocalPosition: {x: 0.003, y: 0.023, z: -0.003}
+  m_LocalPosition: {x: -0.171, y: 0.048, z: -0.113}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 9111609834369135754}
@@ -413,6 +414,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vacuumOnMaterial: {fileID: 2100000, guid: c7d0e7eb87cc1dd4781f7911d9f9db8d, type: 2}
   vacuumOffMaterial: {fileID: 2100000, guid: ea06fa17e88a51b44a24a48a4912a201, type: 2}
+--- !u!64 &6654984815124001303
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034640250589819799}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3329902420748629119, guid: ff3df40555b5877428c61155fc4c61b1, type: 3}
 --- !u!1 &5336395220311864486
 GameObject:
   m_ObjectHideFlags: 0

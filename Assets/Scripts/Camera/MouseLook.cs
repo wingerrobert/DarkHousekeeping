@@ -18,7 +18,7 @@ public class MouseLook : MonoBehaviour
         _player = playerBody.gameObject.GetComponent<PlayerMovement>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         GameObject equippedObject = playerInventory.GetEquipped();
 
@@ -31,8 +31,8 @@ public class MouseLook : MonoBehaviour
         
 
         // Get mouse input
-        float _mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        float _mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        float _mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime;
+        float _mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime;
 
         // Calculate and clamp x input to 90 degrees
         _xRotation -= _mouseY;

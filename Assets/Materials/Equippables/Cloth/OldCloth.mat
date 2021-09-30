@@ -22,11 +22,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: OldCloth
   m_Shader: {fileID: -6465566751694194690, guid: bc94c50a74daa04489c96618e0dfab75, type: 3}
-  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
+  m_ShaderKeywords: _DISABLE_DECALS _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2225
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -162,7 +162,7 @@ Material:
     - _AlphaThresholdShadow: 0.5
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
-    - _Anisotropy: 0.51
+    - _Anisotropy: 0.23
     - _BlendMode: 0
     - _CoatMask: 0
     - _CullMode: 0
@@ -227,8 +227,8 @@ Material:
     - _SecondarySpecular: 1
     - _SecondarySpecularShift: 0.9
     - _Smoothness: 0.37
-    - _SmoothnessMax: 0.546
-    - _SmoothnessMin: 0.168
+    - _SmoothnessMax: 0.245
+    - _SmoothnessMin: 0.1
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _Specular: 1
@@ -248,7 +248,7 @@ Material:
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _SubsurfaceMask: 1
-    - _SupportDecals: 1
+    - _SupportDecals: 0
     - _SurfaceType: 0
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
@@ -286,7 +286,7 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _SpecularColor: {r: 1, g: 0.81144357, b: 0.514151, a: 1}
+    - _SpecularColor: {r: 1, g: 0.9433962, b: 0.8537736, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmissionColor: {r: 1, g: 0.8666667, b: 0.627451, a: 1}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
