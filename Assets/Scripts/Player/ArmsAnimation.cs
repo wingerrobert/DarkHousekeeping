@@ -10,6 +10,16 @@ public class ArmsAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    public void TriggerPikeAttack()
+    {
+        _animator.SetTrigger("PikeAttack");
+    }
+
+    public void TriggerVacuumShooting()
+    { 
+        _animator.SetTrigger("ShootVacuum");
+    }
+
     public void SetSucking(bool value)
     {
         _animator.SetBool("IsVacuuming", value);
@@ -38,6 +48,9 @@ public class ArmsAnimation : MonoBehaviour
                 break;
             case GlobalValues.EquippableHoldType.Cloth:
                 holdTypeValue = "ClothHold";
+                break;
+            case GlobalValues.EquippableHoldType.Pike:
+                holdTypeValue = "PikeHold";
                 break;
         }
         _animator.SetTrigger(holdTypeValue);

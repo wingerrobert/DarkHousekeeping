@@ -14,14 +14,17 @@ public class GlobalValues : MonoBehaviour
         Suction,
         SurfaceCleaner,
         WipableSurface,
-        Door
+        Door,
+        PikeEnd,
+        GarbageArea
     };
 
     public enum EquippableHoldType
     { 
         StandingVacuum,
         SmallHandHeldVacuum,
-        Cloth
+        Cloth,
+        Pike
     }
 
     public enum EquippableHandedness
@@ -34,7 +37,8 @@ public class GlobalValues : MonoBehaviour
     {
         OlBetsy,
         Dusterator,
-        DustyRag
+        DustyRag,
+        BasicPike
     }
 
     public enum EnemyType
@@ -51,7 +55,8 @@ public class GlobalValues : MonoBehaviour
     {
         { EquippableType.OlBetsy, "Vacuum_OlBetsy" },
         { EquippableType.Dusterator, "Vacuum_Dusterator" },
-        { EquippableType.DustyRag, "Cloth_DustyRag" }
+        { EquippableType.DustyRag, "Cloth_DustyRag" },
+        { EquippableType.BasicPike, "Pike_BasicPike" }
     };
 
     public static Dictionary<Tags, string> TagValues = new Dictionary<Tags, string>() 
@@ -61,6 +66,8 @@ public class GlobalValues : MonoBehaviour
         { Tags.Suction, "Suction" },
         { Tags.SurfaceCleaner, "SurfaceCleaner" },
         { Tags.WipableSurface, "WipableSurface" },
-        { Tags.Door, "Door" }
+        { Tags.Door, "Door" },
+        { Tags.PikeEnd, "PikeEnd" },
+        { Tags.GarbageArea, "GarbageArea" }
     };
 }

@@ -9,11 +9,13 @@ public class VacuumController : MonoBehaviour
     public float suctionDistance = 0.5f;
     public float suctionStrength = 1f;
     public float initialIntakeTime = 1.0f;  // The time it takes for dust intake sounds to stop
+    public float shootDelay = 1.0f;
     
     [HideInInspector] public bool isSucking = false;
     [HideInInspector] public bool isIntaking = false;
 
     float _intakeTime;
+    float _previousShootTime = 0.0f;
 
     VacuumSoundController _soundController;
 
@@ -36,11 +38,29 @@ public class VacuumController : MonoBehaviour
 
     private void Update()
     {
+        TickSucking();
+        TickShooting();
+    }
+
+    private void TickShooting()
+    {
+        if (Time.time > shootDelay + _previousShootTime)
+        {
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                _armsAnimation.TriggerVacuumShooting();
+                _previousShootTime = Time.time;
+            }
+        }
+    }
+
+    private void TickSucking()
+    {
         if (_intakeTime > 0)
         {
             _intakeTime -= Time.deltaTime;
         }
-        else 
+        else
         {
             _soundController.StopIntakeSound();
             isIntaking = false;
@@ -55,11 +75,11 @@ public class VacuumController : MonoBehaviour
         {
             if (!_soundController.isPlayingSuck)
             {
-                
+
                 _soundController.StartSuckSound();
             }
         }
-        else 
+        else
         {
             if (_soundController.isPlayingSuck)
             {
