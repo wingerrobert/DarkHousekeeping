@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85abca523bb7e584a98287533ef7bd36, type: 2}
   - {fileID: 11400000, guid: 4e0e35cf817ec744781ee6f42b08ab13, type: 2}
   - {fileID: 11400000, guid: 887d955e767392d4db3986379c1f35ac, type: 2}
+  - {fileID: 11400000, guid: e1a582c329b93da428c5c047b6b4e978, type: 2}
   beforeTransparentCustomPostProcesses: []
   beforeTAACustomPostProcesses: []
   beforePostProcessCustomPostProcesses: []

@@ -8,73 +8,35 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<GlobalValues.EquippableType> loadout;
-    public float _changeEquippableDelay = 0.25f;
-
-    GameObject _equipped;
+    public List<GlobalValues.EquippableItem> loadout;
+    public GameObject equippedItem;
 
     [SerializeField] ArmsAnimation _armsAnimation;
     [SerializeField] Transform _leftHand;
     [SerializeField] Transform _rightHand;
 
     List<GameObject> _inventory;
-    GameObject[] _wipableSurfaces;
 
-    int _currentSlot = 0;
-
+    int _currentSlot = -1;
     float _lastEquippableTime = 0.0f;
-
-    bool _equippableLoadDone = false;
+    float _changeEquippableDelay = 0.25f;
 
     void Start()
     {
-        _wipableSurfaces = GameObject.FindGameObjectsWithTag(GlobalValues.TagValues[GlobalValues.Tags.WipableSurface]);
-
         _inventory = new List<GameObject>();
-
-        loadout = new List<GlobalValues.EquippableType>() { 
-            GlobalValues.EquippableType.Dusterator,
-            GlobalValues.EquippableType.OlBetsy,
-            GlobalValues.EquippableType.DustyRag,
-            GlobalValues.EquippableType.BasicPike
-        };
-
-        loadout.ForEach(e => LoadEquippable(e));
     }
 
     public GameObject GetEquipped()
     {
-        return _equipped;
+        return equippedItem;
     }
 
-    void LoadEquippable(GlobalValues.EquippableType equippable)
+    public void AddItemToInventory(GameObject item)
     {
-        Addressables.LoadAssetAsync<GameObject>(GlobalValues.EquippableAddressableNameMap[equippable]).Completed += OnEquippableLoadDone;
-    }
-
-    void OnEquippableLoadDone(AsyncOperationHandle<GameObject> equippableObjectHandle)
-    {
-        GameObject equippableObject = equippableObjectHandle.Result;
-
-        if (equippableObject == null)
-        {
-            Debug.LogError("Equipple was not loaded successfully");
-        }
-        // equippable objects should be disabled by default
-        
-        GameObject equippableClone = Instantiate(equippableObject);
-
-        equippableClone = PositionEquipped(equippableClone);
-
-        _inventory.Add(equippableClone);
-
-        if (_inventory.Count == loadout.Count)
-        {
-            _equippableLoadDone = true;
-            InitializeWipableSurfaces();
-            DisableAllEquippables();
-            UpdateEquipped();
-        }
+        _inventory.Add(item);
+        _currentSlot = _inventory.Count - 1;
+        PositionEquipped(item);
+        UpdateEquipped();
     }
 
     void DisableAllEquippables()
@@ -84,7 +46,7 @@ public class PlayerInventory : MonoBehaviour
 
     GameObject PositionEquipped(GameObject equippableObject)
     {
-        EquippableItem currentEquippable = equippableObject.GetComponent<EquippableItem>();
+        EquippableHoldType currentEquippable = equippableObject.GetComponent<EquippableHoldType>();
 
         // Determine which hand the equippable is in
         Transform handTransform;
@@ -107,36 +69,27 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_equippableLoadDone)
-        {
-            return;
-        }
-
         if (Time.time > _changeEquippableDelay + _lastEquippableTime)
         { 
             ChangeInventorySlot();
         }
     }
 
-    void InitializeWipableSurfaces()
-    {
-        for (int i = 0; i < _wipableSurfaces.Length; i++)
-        {
-            _wipableSurfaces[i].GetComponent<GenerateCleanSurfaceMap>().InitializeWipableSurface();
-        }
-    }
-
     void UpdateEquipped()
     {
-        if (_equipped != null)
+        if (_inventory.Count <= 0)
+        {
+            return;
+        }
+        if (equippedItem != null)
         { 
-            _equipped.SetActive(false);
+            equippedItem.SetActive(false);
         }
 
-        _equipped = _inventory[_currentSlot];
-        _equipped.SetActive(true);
+        equippedItem = _inventory[_currentSlot];
+        equippedItem.SetActive(true);
 
-        _armsAnimation.SetHoldType(_equipped.GetComponent<EquippableItem>().holdType);
+        _armsAnimation.SetHoldType(equippedItem.GetComponent<EquippableHoldType>().holdType);
     }
 
     void ChangeInventorySlot()

@@ -30,7 +30,7 @@ MonoBehaviour:
     m_Value: 255
   reflectionProbeIntensityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0
     min: 0
 --- !u!114 &-1606471430837989107
 MonoBehaviour:
@@ -57,7 +57,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: -2.0012438
+    m_Value: 0.36688203
   compensation:
     m_OverrideState: 0
     m_Value: 0
@@ -202,10 +202,10 @@ MonoBehaviour:
   m_Name: Box Volume Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 953933255725470678}
   - {fileID: -5644060433938452092}
   - {fileID: -1606471430837989107}
---- !u!114 &953933255725470678
+  - {fileID: 4204322388834580749}
+--- !u!114 &4204322388834580749
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,7 +265,7 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 85.1
+    m_Value: 506.82
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
@@ -287,7 +287,7 @@ MonoBehaviour:
     min: 0.1
   denoisingMode:
     m_OverrideState: 0
-    m_Value: 2
+    m_Value: 0
   anisotropy:
     m_OverrideState: 0
     m_Value: 0

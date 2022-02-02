@@ -23,8 +23,18 @@ public class DustController : MonoBehaviour
                 ParticleSystem system = obj.gameObject.GetComponent<ParticleSystem>();
                 
                 if (system.emission.burstCount > 0)
-                { 
-                    _totalParticles += system.emission.GetBurst(0).maxCount;
+                {
+                    short burstSize = system.emission.GetBurst(0).maxCount;
+                    int maxParticles = system.main.maxParticles;
+
+                    if (burstSize <= maxParticles)
+                    { 
+                        _totalParticles += system.emission.GetBurst(0).maxCount;
+                    }
+                    else 
+                    {
+                        _totalParticles += system.main.maxParticles;
+                    }
                 }
 
                 _particleSystems[_systemIndex++] = system;
@@ -39,12 +49,7 @@ public class DustController : MonoBehaviour
             VacuumController _targetVacuum;
             _targetVacuum = _suctionObject.GetComponentInParent<VacuumController>();
             
-            if (_targetVacuum == null)
-            {
-                return;
-            }
-
-            if (!_targetVacuum.isSucking)
+            if (_targetVacuum == null || !_targetVacuum.isSucking || _targetVacuum.vacuumFill >= 1.0f)
             {
                 return;
             }
@@ -69,10 +74,10 @@ public class DustController : MonoBehaviour
                         if (distanceToTarget > destroyDistance)
                         {
                             // Do not attract if greater than max distance
-                            if (distanceToTarget < _targetVacuum.suctionDistance)
+                            if (distanceToTarget < _targetVacuum.stats.suctionSize)
                             {
                                 // Attract particles based on distance from player
-                                particles[k].position = Vector3.MoveTowards(particles[k].position, _targetTransform.position, _targetVacuum.suctionStrength * Time.fixedDeltaTime * (1 / ((distanceToTarget * distanceToTarget) + 0.1f)));
+                                particles[k].position = Vector3.MoveTowards(particles[k].position, _targetTransform.position, _targetVacuum.stats.suctionStrength * Time.fixedDeltaTime * (1 / ((distanceToTarget * distanceToTarget) + 0.1f)));
                             }
                         }
                         else
@@ -80,6 +85,12 @@ public class DustController : MonoBehaviour
                             _targetVacuum.StartIntaking();
                             particles[k].remainingLifetime = 0;
                             _totalParticles -= 1;
+
+                            if (_targetVacuum.vacuumFill < 1.0f)
+                            { 
+                                _targetVacuum.vacuumFill += 1 / _targetVacuum.stats.reservoirSize;
+                            }
+
                             Debug.Log(_totalParticles);
                         }
                     }

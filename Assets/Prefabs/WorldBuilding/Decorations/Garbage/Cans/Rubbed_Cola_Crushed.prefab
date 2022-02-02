@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1211355171911889427}
   - component: {fileID: 851010370872824773}
   - component: {fileID: 8941069148151708666}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rubbed_Cola_Crushed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

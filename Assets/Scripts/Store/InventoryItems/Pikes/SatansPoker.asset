@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7543c77f1640a443af8b91824b624de, type: 3}
+  m_Name: SatansPoker
+  m_EditorClassIdentifier: 
+  category: 1
+  stats: {fileID: 11400000, guid: 0e96524a154bc444d893f06fc843fcde, type: 2}
+  thumbnail: {fileID: 21300000, guid: fb6791b43d9ec2442bee03170c0f2c2e, type: 3}
+  itemName: Satan's Poker
+  description: Forged with the heat of hell can pick up next to anything.
+  price: 2000
+  minLevel: 5
+  linkedObject: {fileID: 4268476465448974287, guid: 053e072e6a9794d49970a072091ac014, type: 3}

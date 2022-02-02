@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+     public float steppingNoise = 0.0f;
     public float speed = 12.0f;
     public float runMultiplier = 2.0f;
+
+    [SerializeField] float _steppingNoiseBase = 10.0f;
     
     Rigidbody _rigidBody;
     CapsuleCollider _collider;
@@ -39,14 +42,11 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = _crouchSpeed;
         }
 
-        //float moveX = Input.GetAxis("Horizontal");
-        //float moveZ = Input.GetAxis("Vertical");
+        Vector3 movementVector = (transform.forward * Input.GetAxis("Vertical") * currentSpeed * Time.fixedDeltaTime) + (transform.right * Input.GetAxis("Horizontal") * currentSpeed * Time.fixedDeltaTime);
 
-        //Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        _rigidBody.MovePosition(transform.localPosition + movementVector);
 
-        //_rigidBody.MovePosition(transform.position + move.normalized * Time.fixedDeltaTime * currentSpeed);
-        _rigidBody.MovePosition(transform.position + (transform.forward * Input.GetAxis("Vertical") * currentSpeed * Time.fixedDeltaTime) + (transform.right * Input.GetAxis("Horizontal") * currentSpeed * Time.fixedDeltaTime));
-
+        steppingNoise = movementVector.magnitude * _steppingNoiseBase;
     }
 
     void CheckCrouch()

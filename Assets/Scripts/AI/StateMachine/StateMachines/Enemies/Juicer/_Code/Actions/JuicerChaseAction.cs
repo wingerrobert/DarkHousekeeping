@@ -12,11 +12,6 @@ public class JuicerChaseAction : Action
 
     private void Chase(JuicerStateController controller)
     {
-        if (!controller.hasWokenUp())
-        {
-            return;
-        }
-
         if (!controller.isChaseTargetSet)
         {
             controller.currentTarget = controller.targets[0];

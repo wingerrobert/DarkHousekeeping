@@ -188,7 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a651645a4b2c43749a1ad9a7a6aea5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
+  maxMassGrabbable: 1
+  attackRange: 2.5
+  attackSpeed: 0.25
   isGrabbing: 0
   hasTrash: 0
   attachedTrash: {fileID: 0}
+  pikeEnd: {fileID: 7672059101807433392}

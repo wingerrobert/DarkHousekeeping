@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7543c77f1640a443af8b91824b624de, type: 3}
+  m_Name: TrashPike
+  m_EditorClassIdentifier: 
+  category: 1
+  stats: {fileID: 11400000, guid: 5334abedef911924393e983eef3a892a, type: 2}
+  thumbnail: {fileID: 21300000, guid: eeb9df2a7acbf924f9f4431052f93d33, type: 3}
+  itemName: Trash Pike
+  description: Grab the trash to put it in it's place
+  price: 20
+  minLevel: 0
+  linkedObject: {fileID: 6261965276329606331, guid: 01edd11fc1771fe4a96f1a92b33f3cde, type: 3}
