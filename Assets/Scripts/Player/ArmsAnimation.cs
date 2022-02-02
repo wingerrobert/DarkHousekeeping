@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class ArmsAnimation : MonoBehaviour
 {
+    public bool isStabbing = false;
+
     Animator _animator;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
     }
 
-    public void TriggerPikeAttack()
+    public void PikeStabStart()
     {
-        _animator.SetTrigger("PikeAttack");
+        isStabbing = true;
+    }
+
+    public void PikeStabEnd()
+    {
+        isStabbing = false;
+    }
+
+    public void SetPikeAttacking(bool val)
+    {
+        _animator.SetBool("IsPikeAttacking", val);
     }
 
     public void TriggerVacuumShooting()
@@ -28,6 +41,11 @@ public class ArmsAnimation : MonoBehaviour
     public void SetWiping(bool value)
     {
         _animator.SetBool("IsWiping", value);
+    }
+
+    public void SetSweeping(bool value)
+    {
+        _animator.SetBool("IsSweeping", value);
     }
 
     public void SetHoldType(GlobalValues.EquippableHoldType holdType)

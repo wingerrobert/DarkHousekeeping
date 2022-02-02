@@ -7,6 +7,20 @@ public class GlobalValues : MonoBehaviour
     public static readonly int MAX_PARTICLE_SYSTEMS = 50;
     public static readonly int MAX_SUCTION_OBJECTS = 10;
 
+    public enum ComputerUIScreen
+    { 
+        Computer,
+        Store,
+        TextFile
+    }
+
+    public enum CursorValue
+    { 
+        Active,
+        Invalid,
+        Idle
+    };
+
     public enum Tags 
     {
         Player,
@@ -16,7 +30,19 @@ public class GlobalValues : MonoBehaviour
         WipableSurface,
         Door,
         PikeEnd,
-        GarbageArea
+        GarbageArea,
+        Cursor,
+        CursorController,
+        ReservoirUI
+    };
+
+    public enum Layers
+    {
+        Enemy,
+        Ground,
+        Trash,
+        GrimeDecal,
+        Outlinable
     };
 
     public enum EquippableHoldType
@@ -33,12 +59,27 @@ public class GlobalValues : MonoBehaviour
         Left
     }
 
-    public enum EquippableType 
+    public enum EquippableCategory
+    { 
+        Vacuum,
+        Pike,
+        Mop
+    }
+
+    public enum EquippableItem 
     {
+        /* Vacuums */
         OlBetsy,
         Dusterator,
+
+        /* Cloths */
         DustyRag,
-        BasicPike
+
+        /* Pikes */
+        BasicPike,
+
+        /* Mops */
+        Sweeper
     }
 
     public enum EnemyType
@@ -51,15 +92,16 @@ public class GlobalValues : MonoBehaviour
         { EnemyType.JuicerGrub, "Enemy_JuicerGrub" }
     };
 
-    public static Dictionary<EquippableType, string> EquippableAddressableNameMap = new Dictionary<EquippableType, string>()
+    public static Dictionary<EquippableItem, string> EquippableAddressableNameMap = new Dictionary<EquippableItem, string>()
     {
-        { EquippableType.OlBetsy, "Vacuum_OlBetsy" },
-        { EquippableType.Dusterator, "Vacuum_Dusterator" },
-        { EquippableType.DustyRag, "Cloth_DustyRag" },
-        { EquippableType.BasicPike, "Pike_BasicPike" }
+        { EquippableItem.OlBetsy, "Vacuum_OlBetsy" },
+        { EquippableItem.Dusterator, "Vacuum_Dusterator" },
+        { EquippableItem.DustyRag, "Cloth_DustyRag" },
+        { EquippableItem.BasicPike, "Pike_BasicPike" },
+        { EquippableItem.Sweeper, "Mop_Sweeper" }
     };
 
-    public static Dictionary<Tags, string> TagValues = new Dictionary<Tags, string>() 
+    public static Dictionary<Tags, string> TagValues = new Dictionary<Tags, string>()
     {
         { Tags.Player, "Player" },
         { Tags.Dust, "Dust" },
@@ -68,6 +110,25 @@ public class GlobalValues : MonoBehaviour
         { Tags.WipableSurface, "WipableSurface" },
         { Tags.Door, "Door" },
         { Tags.PikeEnd, "PikeEnd" },
-        { Tags.GarbageArea, "GarbageArea" }
+        { Tags.GarbageArea, "GarbageArea" },
+        { Tags.Cursor, "Cursor" },
+        { Tags.CursorController, "CursorController" },
+        { Tags.ReservoirUI, "ReservoirUI" }
+    };
+
+    public static Dictionary<Layers, string> LayerValues = new Dictionary<Layers, string>()
+    {
+        { Layers.Enemy, "Enemy" },
+        { Layers.Ground, "Ground" },
+        { Layers.Trash, "Trash" },
+        { Layers.GrimeDecal, "GrimeDecal" },
+        { Layers.Outlinable, "Outlinable" }
+    };
+
+    public static Dictionary<EquippableCategory, string> CategoryNames = new Dictionary<EquippableCategory, string>()
+    {
+        { EquippableCategory.Mop, "Mops" },
+        { EquippableCategory.Pike, "Pikes" },
+        { EquippableCategory.Vacuum, "Vacuums" },
     };
 }

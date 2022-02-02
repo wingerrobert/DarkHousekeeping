@@ -7,46 +7,49 @@ public class TrashController : MonoBehaviour
     public bool thrownOut = false;
 
     Rigidbody rb;
+    Collider trashCollider;
     GameObject parentPike;
 
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
+        trashCollider = GetComponent<Collider>();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (thrownOut)
-        {
-            return;
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (thrownOut)
+    //    {
+    //        return;
+    //    }
 
-        if (other.tag == GlobalValues.TagValues[GlobalValues.Tags.PikeEnd])
-        {
-            PikeController pikeController = other.GetComponentInParent<PikeController>();
+    //    if (other.tag == GlobalValues.TagValues[GlobalValues.Tags.PikeEnd])
+    //    {
+    //        PikeController pikeController = other.GetComponentInParent<PikeController>();
          
-            if (pikeController.isGrabbing && !pikeController.hasTrash)
-            {
-                parentPike = other.gameObject;
-                rb.isKinematic = true;
-                pikeController.attachedTrash = gameObject;
-                pikeController.hasTrash = true;
-                transform.SetParent(other.transform);
-                transform.localPosition = Vector3.zero;
-            }
-        }
-        if (other.tag == GlobalValues.TagValues[GlobalValues.Tags.GarbageArea])
-        {
-            if (parentPike == null)
-            {
-                return;
-            }
-            PikeController pikeController = parentPike.GetComponentInParent<PikeController>();
+    //        if (pikeController.isGrabbing && !pikeController.hasTrash)
+    //        {
+    //            parentPike = other.gameObject;
+    //            rb.isKinematic = true;
+    //            trashCollider.enabled = false;
+    //            pikeController.attachedTrash = gameObject;
+    //            pikeController.hasTrash = true;
+    //            transform.SetParent(other.transform);
+    //            transform.localPosition = Vector3.zero;
+    //        }
+    //    }
+    //    if (other.tag == GlobalValues.TagValues[GlobalValues.Tags.GarbageArea])
+    //    {
+    //        if (parentPike == null)
+    //        {
+    //            return;
+    //        }
+    //        PikeController pikeController = parentPike.GetComponentInParent<PikeController>();
             
-            pikeController.hasTrash = false;
+    //        pikeController.hasTrash = false;
             
-            transform.SetParent(null);
-            rb.isKinematic = false;
-            thrownOut = true;
-        }
-    }
+    //        transform.SetParent(null);
+    //        rb.isKinematic = false;
+    //        thrownOut = true;
+    //    }
+    //}
 }

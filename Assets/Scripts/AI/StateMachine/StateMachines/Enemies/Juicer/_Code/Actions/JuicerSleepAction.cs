@@ -15,6 +15,7 @@ public class JuicerSleepAction : Action
         if (controller.isChaseTargetSet)
         {
             controller.navMeshAgent.SetDestination(controller.juicerObject.transform.position);
+            controller.isChaseTargetSet = false;
         }
     }
 }

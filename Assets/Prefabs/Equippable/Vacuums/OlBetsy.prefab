@@ -65,7 +65,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: c7d0e7eb87cc1dd4781f7911d9f9db8d, type: 2}
   - {fileID: 2100000, guid: ea06fa17e88a51b44a24a48a4912a201, type: 2}
   - {fileID: 2100000, guid: 7c7dcca6712ab994083b57744d1341aa, type: 2}
-  - {fileID: 2100000, guid: 384285da28116f84481e7b4d751ed08b, type: 2}
+  - {fileID: 2100000, guid: 14b1531ca42e67b41850e40412924fbf, type: 2}
   - {fileID: 2100000, guid: 37d9b0ea1e496dd42ace1d076bebb64f, type: 2}
   - {fileID: 2100000, guid: f44d3862c8b899e4888a3231a2c51bcf, type: 2}
   - {fileID: 2100000, guid: 37d9b0ea1e496dd42ace1d076bebb64f, type: 2}
@@ -185,9 +185,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8850501807ec77b4cbf9fd10b92bfde2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suctionDistance: 0.5
-  suctionStrength: 1
+  stats: {fileID: 11400000, guid: bc4cdff3c846a2c42aff95c953bb1725, type: 2}
+  dustBall: {fileID: 4646068962100843676, guid: 84c7e7423ec4db34aa2afc4f93e280e9, type: 3}
+  suctionLocation: {fileID: 517001170188977158}
+  minimumDustballSize: 0.25
+  vacuumFill: 0
   initialIntakeTime: 1
+  shootDelay: 1
+  reservoirUIElements:
+  - {fileID: 0}
+  - {fileID: 0}
   isSucking: 0
   isIntaking: 0
 --- !u!82 &6417750565799103091
@@ -400,6 +407,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 072b4e384a1898242a652add9e556d8b, type: 3}
   - {fileID: 8300000, guid: dbc6db111b9bc7646a393dd3a44a6702, type: 3}
   - {fileID: 8300000, guid: 529914b27449a4d4e9b213ecdd02b7cd, type: 3}
+  - {fileID: 8300000, guid: 09cb76f3e9d2d7d4693c25e412ec7571, type: 3}
 --- !u!114 &746005434653398911
 MonoBehaviour:
   m_ObjectHideFlags: 0

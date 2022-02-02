@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4960915999830447437}
   - component: {fileID: 7150662432407609735}
   - component: {fileID: 8632528896895812334}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Bedside_Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8664008589545652306}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9c18a6f9fbd37484a932221f47dcadc4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
